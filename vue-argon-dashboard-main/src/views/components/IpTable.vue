@@ -58,7 +58,7 @@
         </table>
       </div>
       <div class="d-flex p-3">
-        <input v-model="newIpAddress" class="form-control" placeholder="Enter IP Address" />
+        <input v-model="newIpAddress" class="form-control  w-50 mt-2" placeholder="Enter IP Address" />
         <button class="btn btn-success mt-2" @click="addIpAddress">Add IP</button>
       </div>
     </div>
