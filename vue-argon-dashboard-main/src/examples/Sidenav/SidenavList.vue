@@ -18,9 +18,9 @@ const getRoute = () => {
     <ul class="navbar-nav">
       <li class="nav-item">
         <sidenav-item
-          to="/dashboard-default"
-          :class="getRoute() === 'dashboard-default' ? 'active' : ''"
-          :navText="'Dashboard'"
+          to="/home"
+          :class="getRoute() === 'home' ? 'active' : ''"
+          :navText="'Úvod'"
         >
           <template v-slot:icon>
             <i class="ni ni-tv-2 text-primary text-sm opacity-10"></i>
@@ -30,9 +30,9 @@ const getRoute = () => {
 
       <li class="nav-item">
         <sidenav-item
-          to="/IPAdresy"
-          :class="getRoute() === 'IPAdresy' ? 'active' : ''"
-          :navText="'IPAdresy'"
+          to="/ip-addresses"
+          :class="getRoute() === 'ip-addresses' ? 'active' : ''"
+          :navText="'Zoznam IP adries'"
         >
           <template v-slot:icon>
             <i

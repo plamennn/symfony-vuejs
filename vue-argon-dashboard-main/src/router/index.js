@@ -6,16 +6,16 @@ const routes = [
   {
     path: "/",
     name: "/",
-    redirect: "/dashboard-default",
+    redirect: "/home",
   },
   {
-    path: "/dashboard-default",
-    name: "Dashboard",
+    path: "/home",
+    name: "Úvod",
     component: Dashboard,
   },
   {
-    path: "/IPAdresy",
-    name: "IPAdresy",
+    path: "/ip-addresses",
+    name: "Zoznam adries",
     component: Tables,
   },
 ];

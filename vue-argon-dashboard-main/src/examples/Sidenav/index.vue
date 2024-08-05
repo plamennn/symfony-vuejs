@@ -2,7 +2,6 @@
 import { computed } from "vue";
 import { useStore } from "vuex";
 import SidenavList from "./SidenavList.vue";
-import logo from "@/assets/img/logo-black-trans.png";
 
 const store = useStore();
 const isRTL = computed(() => store.state.isRTL);
@@ -33,13 +32,7 @@ const darkMode = computed(() => store.state.darkMode);
       ></i>
 
       <router-link class="m-0 navbar-brand" to="/">
-        <img
-          :src="logo"
-          class="navbar-brand-img h-100"
-          alt="main_logo"
-        />
-        <br>
-        <span class="ms-2 font-weight-bold me-2">IP Tracker</span>
+        <h4 class="ms-2 font-weight-bold me-2 text-center">IP Tracker</h4>
       </router-link>
     </div>
 

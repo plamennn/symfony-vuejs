@@ -1,7 +1,7 @@
 <template>
   <div class="card">
     <div class="card-header pb-0">
-      <h6>IP Address Table</h6>
+      <h6>Tabuľka IP Adries</h6>
     </div>
     <div class="card-body px-0 pt-0 pb-2">
       <!-- Error Modal -->
@@ -16,12 +16,12 @@
           <thead>
             <tr>
               <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">#</th>
-              <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">IP Address</th>
-              <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">City</th>
-              <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Region</th>
-              <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Country</th>
-              <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Location</th>
-              <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Action</th>
+              <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">IP Adresa</th>
+              <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Mesto</th>
+              <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Región</th>
+              <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Krajina</th>
+              <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Poloha</th>
+              <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Akcia</th>
             </tr>
           </thead>
           <tbody>
@@ -49,17 +49,25 @@
                 <p class="text-xs text-secondary mb-0">{{ ip.loc || 'N/A' }}</p>
               </td>
               <td class="align-middle text-center">
-                <button class="btn btn-sm btn-primary" @click="synchronize(ip.id)">Synchronize</button>
-                <button class="btn btn-sm btn-danger" @click="deleteIpAddress(ip.id)">Delete</button>
-                <button class="btn btn-sm btn-info" @click="showUpdate(ip)">Update</button>
+                <button class="btn btn-sm btn-primary" @click="synchronize(ip.id)" style="margin-right: 4px">
+                  <i class="fa fa-sync"></i> 
+                </button>
+                <button class="btn btn-sm btn-danger" @click="deleteIpAddress(ip.id)" style="margin-right: 4px">
+                  <i class="fa fa-trash"></i> 
+                </button>
+                <button class="btn btn-sm btn-info" @click="showUpdate(ip)">
+                  <i class="fa fa-edit"></i> 
+                </button>
               </td>
             </tr>
           </tbody>
         </table>
       </div>
       <div class="d-flex p-3">
-        <input v-model="newIpAddress" class="form-control  w-50 mt-2" placeholder="Enter IP Address" />
-        <button class="btn btn-success mt-2" @click="addIpAddress">Add IP</button>
+        <input v-model="newIpAddress" class="form-control w-50 mt-2 me-2" placeholder="Zadajte IP Adresu" />
+        <button class="btn btn-success mt-2" @click="addIpAddress">
+          <i class="fa fa-plus"></i> Pridať IP
+        </button>
       </div>
     </div>
   </div>
@@ -90,7 +98,7 @@ export default {
         const response = await fetch('/api/ips');
         if (!response.ok) {
           const error = await response.json();
-          throw new Error(error.error || 'Failed to fetch IP addresses');
+          throw new Error(error.error || 'Nepodarilo sa načítať IP adresy');
         }
         const data = await response.json();
         this.ipAddresses = data;
@@ -111,12 +119,12 @@ export default {
         });
         if (!response.ok) {
           const error = await response.json();
-          throw new Error(error.error || 'Failed to add IP address');
+          throw new Error(error.error || 'Nepodarilo sa pridať IP adresu');
         }
         const data = await response.json();
         this.ipAddresses.push(data);
         this.newIpAddress = '';
-        await this.synchronize(data.id); // Synchronize immediately after adding
+        await this.synchronize(data.id); // Synchronizácia ihneď po pridaní
       } catch (error) {
         this.errorMessage = error.message;
         this.showErrorModal = true;
@@ -129,12 +137,12 @@ export default {
         });
         if (!response.ok) {
           const error = await response.json();
-          throw new Error(error.error || 'Failed to synchronize IP address');
+          throw new Error(error.error || 'Nepodarilo sa synchronizovať IP adresu');
         }
         const updatedIp = await response.json();
         const index = this.ipAddresses.findIndex(ip => ip.id === id);
         if (index !== -1) {
-          this.ipAddresses[index] = updatedIp; // Directly update the item
+          this.ipAddresses[index] = updatedIp; // Priama aktualizácia položky
         }
       } catch (error) {
         this.errorMessage = error.message;
@@ -148,7 +156,7 @@ export default {
         });
         if (!response.ok) {
           const error = await response.json();
-          throw new Error(error.error || 'Failed to delete IP address');
+          throw new Error(error.error || 'Nepodarilo sa zmazať IP adresu');
         }
         this.ipAddresses = this.ipAddresses.filter(ip => ip.id !== id);
       } catch (error) {
